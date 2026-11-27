@@ -1,19 +1,27 @@
-# Raila e os Ecos dos Deuses
+# Princesinha Raila: O Segredo da Coroa
+
+Jogo de plataforma em Flask, HTML, CSS e JavaScript. Ajude a Princesinha Raila a atravessar as ruínas de Roma e recuperar a coroa no Templo Antigo.
+
+## Estrutura
+
+- `app.py`
+- `requirements.txt`
+- `templates/index.html`
+- `static/style.css`
+- `static/game.js`
 
 ## Executar localmente
+
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
-Abra http://127.0.0.1:5000
+
+Abra `http://127.0.0.1:5000` no navegador.
 
 ## Publicar no Render
-1. Envie esta pasta para um repositório GitHub.
-2. No Render, escolha New + > Web Service e conecte o repositório.
-3. Configure:
-   - Runtime: Python
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `gunicorn app:app`
-4. Clique em Deploy. O Render fornecerá um endereço HTTPS público.
 
-O jogo não precisa de banco de dados para funcionar. A rota `/api/recorde` apenas recebe e confirma a pontuação da partida.
+- Build Command: `pip install -r requirements.txt`
+- Start Command: `gunicorn app:app --bind 0.0.0.0:$PORT`
+
+No celular, jogue com a tela na horizontal. Use os botões ◀ e ▶ para andar e segure PULAR para saltar.
