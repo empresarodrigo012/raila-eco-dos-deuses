@@ -2,62 +2,62 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#171329">
-  <meta name="description" content="Uma aventura de mitologia e história feita especialmente para Raila Camile.">
-  <title>Raila e os Ecos dos Deuses</title>
-  <link rel="manifest" href="/static/manifest.json">
+  <meta name="description" content="Princesinha Raila: uma aventura especial para recuperar a coroa perdida no templo de Roma. Feito por Dri.">
+  <title>Princesinha Raila: O Segredo da Coroa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="stars" aria-hidden="true"></div>
-  <header class="topbar">
-    <div class="brand"><span class="brand-mark">✦</span><span>CRÔNICAS DO TEMPO</span></div>
-    <button class="sound-toggle" id="soundToggle" aria-label="Ativar ou desativar sons">♫ <span>Som</span></button>
-  </header>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">♛</div>
+      <div class="brand-copy"><span>UMA AVENTURA ROMANA</span><strong>PRINCESINHA RAILA</strong></div>
+      <div class="made-by">feito com ♥ por <b>Dri</b></div>
+    </header>
 
-  <main class="shell">
-    <section class="hero" id="home">
-      <div class="eyebrow">UMA JORNADA CRIADA ESPECIALMENTE PARA</div>
-      <h1>Raila Camile <span>e os Ecos dos Deuses</span></h1>
-      <p class="intro">Os antigos mistérios despertaram. A história precisa de uma exploradora curiosa para atravessar templos, decifrar lendas e recuperar os artefatos perdidos.</p>
-      <div class="hero-meta"><span>⌁ Mitologia & história</span><span>✧ Aventura de conhecimento</span><span>♡ Feito com carinho</span></div>
-      <button class="primary-btn" id="startBtn">Começar a aventura <span>→</span></button>
-      <div class="hero-foot">SEU DESTINO ESTÁ ESCRITO NAS ESTRELAS</div>
+    <section class="game-layout" aria-label="Jogo Princesinha Raila">
+      <div class="quest-strip">
+        <div class="quest-icon">✦</div>
+        <div class="quest-copy"><small>MISSÃO PRINCIPAL</small><strong>Encontre a coroa no Templo Antigo!</strong></div>
+        <div class="progress-wrap"><span id="progressText">0%</span><div class="progress-track"><i id="progressBar"></i></div></div>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="game" width="960" height="540" aria-label="Princesinha Raila atravessando Roma para recuperar a coroa"></canvas>
+        <div class="hud">
+          <div class="hud-pill"><span>❤️</span><b id="lives">5</b><small>VIDAS</small></div>
+          <div class="hud-pill"><span>🪙</span><b id="coins">0</b><small>MOEDAS</small></div>
+          <div class="hud-pill score-pill"><span>⭐</span><b id="score">0</b><small>PONTOS</small></div>
+        </div>
+        <div id="overlay" class="overlay">
+          <div class="story-card">
+            <div class="story-emblem">👑</div>
+            <p class="eyebrow">UMA MISSÃO PARA UMA GRANDE HEROÍNA</p>
+            <h1>O Segredo da<br><em>Coroa Perdida</em></h1>
+            <p class="story-text">A coroa real foi escondida no Templo Antigo de Roma! Ajude a Princesinha Raila a atravessar o caminho, pegar moedas e recuperar seu tesouro.</p>
+            <div class="dedication">Um jogo especial, feito com carinho por <b>Dri</b>, só para você. ♥</div>
+            <button id="startBtn" class="main-btn">COMEÇAR A MISSÃO <span>➜</span></button>
+            <p class="instructions"><b>Como jogar:</b> ← → ou A/D para andar · Espaço ou ↑ para pular</p>
+          </div>
+        </div>
+        <div id="message" class="toast hidden" role="status"></div>
+      </div>
+      <div class="controls" aria-label="Controles do jogo">
+        <div class="move-controls">
+          <button id="leftBtn" class="control-btn" aria-label="Andar para esquerda">◀</button>
+          <button id="rightBtn" class="control-btn" aria-label="Andar para direita">▶</button>
+        </div>
+        <div class="control-hint">SEGURE PARA ANDAR</div>
+        <button id="jumpBtn" class="control-btn jump-btn" aria-label="Pular">PULAR <span>⤴</span></button>
+      </div>
     </section>
 
-    <section class="game hidden" id="game">
-      <div class="game-head">
-        <div><div class="eyebrow" id="chapterLabel">CAPÍTULO I</div><h2 id="chapterTitle">O chamado do Olimpo</h2></div>
-        <div class="score-pill">✧ <b id="score">0</b> pontos</div>
-      </div>
-      <div class="progress-track"><div id="progressBar"></div></div>
-      <div class="scene-card">
-        <div class="scene-art" id="sceneArt">🏛️</div>
-        <div class="scene-copy"><div class="location" id="location">GRÉCIA ANTIGA</div><p id="story"></p></div>
-      </div>
-      <div class="question-card">
-        <div class="question-top"><span id="questionCount">DESAFIO 1 DE 6</span><span>ESCOLHA COM SABEDORIA</span></div>
-        <h3 id="question"></h3>
-        <div class="answers" id="answers"></div>
-        <div class="feedback hidden" id="feedback" aria-live="polite"></div>
-        <button class="next-btn hidden" id="nextBtn">Continuar jornada <span>→</span></button>
-      </div>
-      <div class="game-bottom"><span>✦ Cada resposta revela um fragmento da história</span><button id="quitBtn">Sair da aventura</button></div>
-    </section>
-
-    <section class="ending hidden" id="ending">
-      <div class="ending-icon">🏺</div>
-      <div class="eyebrow">A ÚLTIMA PÁGINA FOI ESCRITA</div>
-      <h2>As lendas jamais esquecerão seu nome, Raila.</h2>
-      <p id="finalText">Você atravessou os séculos e provou que a curiosidade é uma força tão poderosa quanto a dos próprios deuses.</p>
-      <div class="final-score"><span>SUA PONTUAÇÃO</span><strong id="finalScore">0</strong><small>pontos de sabedoria</small></div>
-      <div class="final-blessing">“O conhecimento é um tesouro que nenhuma tempestade pode levar.”</div>
-      <button class="primary-btn" id="againBtn">Jogar novamente <span>↻</span></button>
-      <button class="text-btn" id="homeBtn">Voltar ao início</button>
-    </section>
-    <footer>UMA PEQUENA VIAGEM PELA HISTÓRIA, FEITA PARA UMA PESSOA ESPECIAL ✦</footer>
+    <footer class="footer"><span>🏛️ RUÍNAS DE ROMA → TEMPLO ANTIGO</span><span>Recupere a coroa e complete a missão!</span></footer>
+    <div class="rotate-notice"><div>📱 ↻</div><strong>Gire o celular</strong><span>Esta aventura fica melhor com a tela deitada.</span></div>
   </main>
-  <script src="{{ url_for('static', filename='game.js') }}"></script>
+  <script src="{{ url_for('static', filename='game.js') }}" defer></script>
 </body>
 </html>
